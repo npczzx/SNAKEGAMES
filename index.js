@@ -46,8 +46,8 @@ const headImg = document.getElementById("headImg");
 const bgCanvas = document.createElement("canvas");
 const bgCtx = bgCanvas.getContext("2d");
 
-const TILE_PC = 40;
-const TILE_PHONE = 32;
+const TILE_PC = 30;
+const TILE_PHONE = 25;
 let tile = TILE_PC;
 
 const COLOR_FOOD = "#ff3d81";

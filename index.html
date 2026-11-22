@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NE 1A</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div class="background"></div>
+
+    <main class="game-container">
+
+        <div class="top-bar">
+            <button class="top-btn btn-settings" id="settingsBtn">&#9881; SETTINGS</button>
+
+            <div class="stat stat-score">
+                <span class="stat-label">SCORE</span>
+                <span class="stat-value" id="score">0</span>
+            </div>
+
+            <div class="stat stat-best">
+                <span class="stat-label">BEST</span>
+                <span class="stat-value" id="best">0</span>
+            </div>
+
+            <img class="logo" src="img/logo.png" alt="Logo">
+
+            <button class="top-btn btn-custom" id="customBtn">&#127912; MODIFY</button>
+
+            <div class="speed-box">
+                <button class="small-btn" id="slowBtn">-</button>
+                <span class="speed-label">CHANGE SPEED <span id="speed">5</span></span>
+                <button class="small-btn" id="fastBtn">+</button>
+            </div>
+        </div>
+
+        <div class="canvas-wrap" id="canvasWrap">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+            <div class="overlay" id="overlay">
+                <h2 class="overlay-title">THE LAST BITE</h2>
+                <p id="message">THINK FAST</p>
+                <button id="startBtn" class="play-btn">PLAY</button>
+                <input id="nameInput" class="name-input" type="text" maxlength="10" placeholder="ENTER YOUR NAME" autocomplete="off">
+            </div>
+        </div>
+
+        <img id="foodImg" src="img/logo.png" style="display:none;" alt="food">
+        <img id="headImg" src="" style="display:none;" alt="snake head">
+
+        <div class="bottom-bar">
+            <div class="dpad" id="dpad">
+                <button class="dpad-btn" data-dir="up">&#9650;</button>
+                <div class="dpad-row">
+                    <button class="dpad-btn" data-dir="left">&#9664;</button>
+                    <button class="dpad-btn" data-dir="down">&#9660;</button>
+                    <button class="dpad-btn" data-dir="right">&#9654;</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div class="result-screen hidden" id="resultScreen">
+        <div class="result-card">
+            <button class="result-close" id="resultCloseBtn" aria-label="Back">&#10005;</button>
+
+            <div class="result" id="result">
+                <div class="result-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+                </div>
+                <div class="result-info">
+                    <span class="result-label" id="resultTitle"></span>
+                    <span class="result-points" id="resultScore"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="settings-panel hidden" id="settingsPanel">
+        <div class="settings-box">
+            <h2 class="settings-title">SETTINGS</h2>
+
+            <div class="setting-row">
+                <span class="setting-label">MUSIC</span>
+                <div class="volume-control">
+                    <button class="small-btn" id="musicDown">-</button>
+                    <span class="setting-value" id="musicValue">30%</span>
+                    <button class="small-btn" id="musicUp">+</button>
+                </div>
+            </div>
+
+            <div class="setting-row">
+                <span class="setting-label">EAT SOUND</span>
+                <div class="volume-control">
+                    <button class="small-btn" id="eatDown">-</button>
+                    <span class="setting-value" id="eatValue">100%</span>
+                    <button class="small-btn" id="eatUp">+</button>
+                </div>
+            </div>
+
+            <button id="closeSettingsBtn" class="play-btn">DONE</button>
+        </div>
+    </div>
+
+    <div class="settings-panel hidden" id="customPanel">
+        <div class="settings-box">
+            <h2 class="settings-title">MODIFY</h2>
+
+            <canvas id="previewCanvas" class="preview" width="320" height="190"></canvas>
+
+            <div class="setting-row">
+                <span class="setting-label">SNAKE SKIN</span>
+                <div class="volume-control">
+                    <button class="small-btn" id="skinPrev">&#8249;</button>
+                    <span class="setting-value custom-value" id="skinValue"></span>
+                    <button class="small-btn" id="skinNext">&#8250;</button>
+                </div>
+            </div>
+
+            <div class="setting-row">
+                <span class="setting-label">MAP</span>
+                <div class="volume-control">
+                    <button class="small-btn" id="mapPrev">&#8249;</button>
+                    <span class="setting-value custom-value" id="mapValue"></span>
+                    <button class="small-btn" id="mapNext">&#8250;</button>
+                </div>
+            </div>
+
+            <div class="setting-row">
+                <span class="setting-label">FOOD</span>
+                <div class="volume-control">
+                    <button class="small-btn" id="foodPrev">&#8249;</button>
+                    <span class="setting-value custom-value" id="foodValue"></span>
+                    <button class="small-btn" id="foodNext">&#8250;</button>
+                </div>
+            </div>
+
+            <button id="closeCustomBtn" class="play-btn">DONE</button>
+        </div>
+    </div>
+
+    <div id="jumpscare" class="jumpscare">
+        <img src="img/jumpscare.jpg" alt="Horror face">
+        <button id="restartBtn" class="restart-btn">Back</button>
+    </div>
+
+    <audio id="scareSound" src="img/jumpscare.mp3" preload="auto"></audio>
+    <audio id="bgMusic" src="img/background.mp3" loop preload="auto"></audio>
+    <audio id="eatSound" src="img/eat.mp3" preload="auto"></audio>
+
+    <script src="index.js"></script>
+</body>
+</html>
